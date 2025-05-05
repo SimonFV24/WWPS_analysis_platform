@@ -1,7 +1,7 @@
 os
 pandas
 streamlit
-matplotlib.pyplot
+matplotlib
 scipy
 numpy
 networkx
