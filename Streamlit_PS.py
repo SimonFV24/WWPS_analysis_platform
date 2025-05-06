@@ -113,9 +113,9 @@ def rawdata(csv_files, parq_files, rain_file):
 
     st.header('Rainfall data')
 
-    rain_2022 = get_file(rain_file[2], RAIN_DIR)
-    rain_2023 = get_file(rain_file[3], RAIN_DIR)
-    rain_2024 = get_file(rain_file[4], RAIN_DIR)
+    rain_2022 = get_file(rain_file[0], RAIN_DIR)
+    rain_2023 = get_file(rain_file[1], RAIN_DIR)
+    rain_2024 = get_file(rain_file[2], RAIN_DIR)
 
     config = {'timestamp': st.column_config.DateColumn('timestamp', format='YYYY-MM-DD')}
     col2_1, col2_2, col2_3 = st.columns(3)
@@ -133,7 +133,7 @@ def rawdata(csv_files, parq_files, rain_file):
 
 # Main code for the climate analysis
 def climate(rain_file):
-    df = get_file(rain_file[0], RAIN_DIR)
+    df = get_file(3], RAIN_DIR)
 
     df_historical = historical_rain(df)
 
@@ -229,7 +229,7 @@ def climate(rain_file):
 
 # Main code for the DWF and WWF analysis
 def flow(rain_file):
-    historical_rain = get_file(rain_file[0], RAIN_DIR)
+    historical_rain = get_file(rain_file[3], RAIN_DIR)
     average_rain_aalesund, average_rain_mr, df_rain_summary = rain_alesund_v_mr(historical_rain)
 
     num_stations = connection_matrix().shape[0]
@@ -738,8 +738,8 @@ def user_data(rain_file):
         col2_2024.dataframe(nan_values_2024)
 
         # get rain data and convert time
-        rain_2023 = prepare_rain_data(rain_file[3])
-        rain_2024 = prepare_rain_data(rain_file[4])
+        rain_2023 = prepare_rain_data(rain_file[1])
+        rain_2024 = prepare_rain_data(rain_file[2])
 
         # merge raw data with rain
         df_combined_2023 = merge_with_rain(df_2023, rain_2023)
@@ -838,7 +838,7 @@ def user_data(rain_file):
         st.subheader('Power consumption for average WWF, 2024')
         simulate_control_run(aligned_data_rain_24, pump_setpoint, pump_stop, pump_data)
 
-        historical_rain = get_file(rain_file[0], RAIN_DIR)
+        historical_rain = get_file(rain_file[3], RAIN_DIR)
         average_rain_aalesund, average_rain_mr, df_rain_summary = rain_alesund_v_mr(historical_rain)
 
         st.subheader('Rainfall scenarios for station in 2100')
@@ -1434,9 +1434,9 @@ def single_period_sim(df, rain_file, year, sump_size, pump_setpoint, pump_stop):
 
     # get rain data and convert time
     if year == 2023: # file 3 = 2023, file 4 = 2024
-        rain = prepare_rain_data(rain_file[3])
+        rain = prepare_rain_data(rain_file[1])
     if year == 2024:
-        rain = prepare_rain_data(rain_file[4])
+        rain = prepare_rain_data(rain_file[2])
 
     # merge raw data with rain
     df_combined = merge_with_rain(df, rain)
@@ -1495,7 +1495,7 @@ def single_period_sim(df, rain_file, year, sump_size, pump_setpoint, pump_stop):
     st.subheader(f'Power consumption for average WWF, {year}')
     simulate_control_run(aligned_data_rain, pump_setpoint, pump_stop, pump_data)
 
-    historical_rain = get_file(rain_file[0], RAIN_DIR)
+    historical_rain = get_file(rain_file[3], RAIN_DIR)
     average_rain_aalesund, average_rain_mr, df_rain_summary = rain_alesund_v_mr(historical_rain)
 
     st.subheader('Rainfall scenarios for station in 2100')
