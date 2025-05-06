@@ -43,18 +43,20 @@ Kd = 0.005
 
 
 # Folder Directories
-RAW_DATA_DIR = 'C:/Users/Simon/PycharmProjects/pythonProject/.sem3/fordypning/Master/ALL/PA2_split'
-DATA_DIR = 'C:/Users/Simon/PycharmProjects/pythonProject/.sem3/fordypning/Master/ALL/Combine_leveldiff'
-COST_DIR = 'C:/Users/Simon/PycharmProjects/pythonProject/.sem3/fordypning/Master/ALL/poly_win'
-COST_DIR_FUTURE = 'C:/Users/Simon/PycharmProjects/pythonProject/.sem3/fordypning/Master/ALL/poly_win_2100'
-RAIN_DIR = 'C:/Users/Simon/PycharmProjects/pythonProject/.sem3/fordypning/Master/ALL/Rain'
+# RAW_DATA_DIR = 'C:/Users/Simon/PycharmProjects/pythonProject/.sem3/fordypning/Master/ALL/PA2_split'
+RAW_DATA_DIR = None
+DATA_DIR = './'
+COST_DIR = './poly_win'
+COST_DIR_FUTURE = './poly_win_2100'
+RAIN_DIR = './Rain'
 
 parquet_files = get_available_files(DATA_DIR, '.parquet')
-raw_files = get_available_files(RAW_DATA_DIR,'.csv')
+# raw_files = get_available_files(RAW_DATA_DIR,'.csv')
+raw_files = None
 rain_files = get_available_files(RAIN_DIR, '.csv')
 
 # Individual files used
-total_nan = pd.read_csv('C:/Users/Simon/PycharmProjects/pythonProject/.sem3/fordypning/Master/ALL/NAN_folder/nan_summary.csv')
+total_nan = pd.read_csv('./NAN_folder/nan_summary.csv')
 
 # Streamlit UI
 st.title('Station Viewer')
@@ -83,16 +85,17 @@ def main():
 # Main code for the raw data UI
 def rawdata(csv_files, parq_files, rain_file):
     st.header('Raw data')
-    selected_raw_file = st.selectbox('Choose available file', csv_files)
+    st.write('Raw data was too large and will not be included')
+    # selected_raw_file = st.selectbox('Choose available file', csv_files)
 
-    if selected_raw_file:
-        df_raw = get_file(selected_raw_file, RAW_DATA_DIR)
-        st.write('### Preview of', selected_raw_file)
-        col1_1, col1_2 = st.columns(2)
-        col1_1.write('Average station tank level')
-        col1_1.dataframe(df_raw[['timestamp', 'avg']].rename(columns={'avg': 'level'}), hide_index=True, width=500)
-        col1_2.write('Nan-values')
-        col1_2.dataframe(df_raw[['timestamp', 'avg']].isna().sum().to_frame(name='value'))
+    # if selected_raw_file:
+    #     df_raw = get_file(selected_raw_file, RAW_DATA_DIR)
+    #     st.write('### Preview of', selected_raw_file)
+    #     col1_1, col1_2 = st.columns(2)
+    #     col1_1.write('Average station tank level')
+    #     col1_1.dataframe(df_raw[['timestamp', 'avg']].rename(columns={'avg': 'level'}), hide_index=True, width=500)
+    #     col1_2.write('Nan-values')
+    #     col1_2.dataframe(df_raw[['timestamp', 'avg']].isna().sum().to_frame(name='value'))
 
     st.header('Total nan-values')
     df_summary = total_nan
