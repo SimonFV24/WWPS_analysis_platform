@@ -133,7 +133,7 @@ def rawdata(csv_files, parq_files, rain_file):
 
 # Main code for the climate analysis
 def climate(rain_file):
-    df = get_file(3], RAIN_DIR)
+    df = get_file(rain_file[3], RAIN_DIR)
 
     df_historical = historical_rain(df)
 
