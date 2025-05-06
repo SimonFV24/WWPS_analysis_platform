@@ -1160,8 +1160,8 @@ def scenario_rain(df, step, rain, f_rain):
 
 def rain_alesund_v_mr(df):
     df_historical = historical_rain(df)
-    rain_2023 = get_file(rain_files[3], RAIN_DIR)
-    rain_2024 = get_file(rain_files[4], RAIN_DIR)
+    rain_2023 = get_file(rain_files[1], RAIN_DIR)
+    rain_2024 = get_file(rain_files[2], RAIN_DIR)
     rain_aalesund_2023 = rain_2023['day_rainfall'].sum()
     rain_aalesund_2024 = rain_2024['day_rainfall'].sum()
     average_rain_aalesund = (rain_aalesund_2023 + rain_aalesund_2024) / 2
