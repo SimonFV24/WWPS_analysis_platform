@@ -1083,7 +1083,10 @@ def rcp(future_period_1, future_period_2, baseline):
     def compute_projection(base, years, rates):
         projections = []
         for rate in rates:
-            proj = base * (1 + rate) ** ((years - years[0]) / 10)
+            x = base * (1 + rate)
+            n = len(years) - 1
+            g = (x / base) **(1/n) -1
+            proj = base * (1 + g)**(years - years[0])
             projections.append(proj)
         return np.array(projections)
 
@@ -1124,12 +1127,12 @@ def future_rain(file, win, poly, rain_aalesund, rain_mr):
 def compute_and_plot_rain_scenarios(aligned_data, aligned_data_rain, df_name, average_rain_aalesund, average_rain_MR):
     aalesund_MR_ratio = average_rain_aalesund / average_rain_MR
 
-    rpc_max_45 = 3930 * aalesund_MR_ratio
-    rpc_mid_45 = 2759 * aalesund_MR_ratio
-    rpc_min_45 = 1700 * aalesund_MR_ratio
-    rpc_max_85 = 4784 * aalesund_MR_ratio
-    rpc_mid_85 = 3682 * aalesund_MR_ratio
-    rpc_min_85 = 2080 * aalesund_MR_ratio
+    rpc_max_45 = 2297 * aalesund_MR_ratio
+    rpc_mid_45 = 2094 * aalesund_MR_ratio
+    rpc_min_45 = 1826 * aalesund_MR_ratio
+    rpc_max_85 = 2465 * aalesund_MR_ratio
+    rpc_mid_85 = 2295 * aalesund_MR_ratio
+    rpc_min_85 = 1938 * aalesund_MR_ratio
     hist_1958_2024 = 2600 * aalesund_MR_ratio
     hist_2000_2024 = 2371 * aalesund_MR_ratio
 
