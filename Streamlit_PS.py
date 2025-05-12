@@ -27,21 +27,6 @@ def get_file(file, directory):
     return df
 
 
-# Initial Variables
-previous_error = 0.0
-integral = 0.0
-
-# Fuzzy logic PID-Values
-# Kp = 0.1845
-# Ki = 0.0052
-# Kd = 0.0054
-
-# Personalized numbers, more dynamic for multiple stations
-Kp = 0.184
-Ki = 0.0055
-Kd = 0.005
-
-
 # Folder Directories
 # RAW_DATA_DIR = 'C:/Users/Simon/PycharmProjects/pythonProject/.sem3/fordypning/Master/ALL/PA2_split'
 RAW_DATA_DIR = None
@@ -1237,6 +1222,11 @@ class Control:
         self.W_to_kW = 1000
         self.startup_time = 10
 
+        # Fuzzy logic PID-Values
+        # Kp = 0.1845
+        # Ki = 0.0052
+        # Kd = 0.0054
+        
         self.Kp = 0.184
         self.Ki = 0.0055
         self.Kd = 0.005
