@@ -538,11 +538,11 @@ def maintenance():
     st.write('This part will not be covered, and moved to future work.')
 
 
-# Estimated power concumption and cost pr/day for the pumps in the station
+# Estimated power consumption and cost pr/day for the pumps in the station
 def consumption():
     st.header('Station consumption')
-    st.write('min power consumption at win=925 and poly=6')
-    st.write('max power consumption at win=700 and poly=6')
+    st.write('Min power consumption with filter parameters of: win = 925 and poly = 6')
+    st.write('Max power consumption with filter parameters of: win = 700 and poly = 6')
 
     power_files = get_available_files(COST_DIR, '.csv')
     power_future_files = get_available_files(COST_DIR_FUTURE, '.csv')
@@ -554,12 +554,6 @@ def consumption():
 
     for f in power_data:
         df = get_file(f,COST_DIR)
-        if f.endswith('_23.csv'):
-            price = 0.5485
-        elif f.endswith('_24.csv'):
-            price = 0.4086
-        else:
-            price = 0
 
         f = f.replace('poly_win', 'PA')
         f = f.replace('.csv', '')
@@ -567,25 +561,25 @@ def consumption():
             'Station': f,
             'Control': 'ON/OFF <br> PID',
             'Min power': f'{df["on_off_c"].iloc[0]:.2f} <br> {df["pid_c"].iloc[0]:.2f}',
+            'Min % diff': f'{((df["pid_c"].iloc[0] - df["on_off_c"].iloc[0])/df["on_off_c"].iloc[0])*100:.2f}',
             'Max power': f'{df["on_off_c"].iloc[1]:.2f} <br> {df["pid_c"].iloc[1]:.2f}',
-            'Min cost': f'{(df["on_off_c"].iloc[0] * price):.2f} <br> {(df["pid_c"].iloc[0] * price):.2f}',
-            'Max cost': f'{(df["on_off_c"].iloc[1] * price):.2f} <br> {(df["pid_c"].iloc[1] * price):.2f}',
+            'Max % diff': f'{((df["pid_c"].iloc[1] - df["on_off_c"].iloc[1])/df["on_off_c"].iloc[1])*100:.2f}',
         })
         dwf_flow_power.append({
             'Station': f,
             'Control': 'ON/OFF <br> PID',
             'Min power': f'{df["on_off_c"].iloc[2]:.2f} <br> {df["pid_c"].iloc[2]:.2f}',
+            'Min % diff': f'{((df["pid_c"].iloc[2] - df["on_off_c"].iloc[2])/df["on_off_c"].iloc[2])*100:.2f}',
             'Max power': f'{df["on_off_c"].iloc[3]:.2f} <br> {df["pid_c"].iloc[3]:.2f}',
-            'Min cost': f'{(df["on_off_c"].iloc[2] * price):.2f} <br> {(df["pid_c"].iloc[2] * price):.2f}',
-            'Max cost': f'{(df["on_off_c"].iloc[3] * price):.2f} <br> {(df["pid_c"].iloc[3] * price):.2f}',
+            'Max % diff': f'{((df["pid_c"].iloc[3] - df["on_off_c"].iloc[3])/df["on_off_c"].iloc[3])*100:.2f}',
         })
         wwf_flow_power.append({
             'Station': f,
             'Control': 'ON/OFF <br> PID',
             'Min power': f'{df["on_off_c"].iloc[4]:.2f} <br> {df["pid_c"].iloc[4]:.2f}',
+            'Min % diff': f'{((df["pid_c"].iloc[4] - df["on_off_c"].iloc[4])/df["on_off_c"].iloc[4])*100:.2f}',
             'Max power': f'{df["on_off_c"].iloc[5]:.2f} <br> {df["pid_c"].iloc[5]:.2f}',
-            'Min cost': f'{(df["on_off_c"].iloc[4] * price):.2f} <br> {(df["pid_c"].iloc[4] * price):.2f}',
-            'Max cost': f'{(df["on_off_c"].iloc[5] * price):.2f} <br> {(df["pid_c"].iloc[5] * price):.2f}',
+            'Max % diff': f'{((df["pid_c"].iloc[5] - df["on_off_c"].iloc[5])/df["on_off_c"].iloc[5])*100:.2f}',
         })
 
     avg_flow_power = pd.DataFrame(avg_flow_power)
@@ -601,7 +595,6 @@ def consumption():
 
     for f2 in power_future_files:
         df = get_file(f2, COST_DIR_FUTURE)
-        price = (0.5485 + 0.4086)/2
         f2 = f2.replace('combined', 'PA')
         f2 = f2.replace('_23.csv', '')
         avg_future_power = {
@@ -624,6 +617,16 @@ def consumption():
                           f'{df["on_off_c"].iloc[7]:.2f} <br> {df["pid_c"].iloc[7]:.2f}',
                           ],
 
+            'Min % diff':[f'{((df["pid_c"].iloc[0] - df["on_off_c"].iloc[0])/df["on_off_c"].iloc[0])*100:.2f}',
+                          f'{((df["pid_c"].iloc[1] - df["on_off_c"].iloc[1])/df["on_off_c"].iloc[1])*100:.2f}',
+                          f'{((df["pid_c"].iloc[2] - df["on_off_c"].iloc[2])/df["on_off_c"].iloc[2])*100:.2f}',
+                          f'{((df["pid_c"].iloc[3] - df["on_off_c"].iloc[3])/df["on_off_c"].iloc[3])*100:.2f}',
+                          f'{((df["pid_c"].iloc[4] - df["on_off_c"].iloc[4])/df["on_off_c"].iloc[4])*100:.2f}',
+                          f'{((df["pid_c"].iloc[5] - df["on_off_c"].iloc[5])/df["on_off_c"].iloc[5])*100:.2f}',
+                          f'{((df["pid_c"].iloc[6] - df["on_off_c"].iloc[6])/df["on_off_c"].iloc[6])*100:.2f}',
+                          f'{((df["pid_c"].iloc[7] - df["on_off_c"].iloc[7])/df["on_off_c"].iloc[7])*100:.2f}',
+                          ],
+
             'Max power': [f'{df["on_off_c"].iloc[8]:.2f} <br> {df["pid_c"].iloc[8]:.2f}',
                           f'{df["on_off_c"].iloc[9]:.2f} <br> {df["pid_c"].iloc[9]:.2f}',
                           f'{df["on_off_c"].iloc[10]:.2f} <br> {df["pid_c"].iloc[10]:.2f}',
@@ -634,24 +637,14 @@ def consumption():
                           f'{df["on_off_c"].iloc[15]:.2f} <br> {df["pid_c"].iloc[15]:.2f}',
                           ],
 
-            'Min cost': [f'{(df["on_off_c"].iloc[0])*price:.2f} <br> {(df["pid_c"].iloc[0])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[1])*price:.2f} <br> {(df["pid_c"].iloc[1])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[2])*price:.2f} <br> {(df["pid_c"].iloc[2])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[3])*price:.2f} <br> {(df["pid_c"].iloc[3])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[4])*price:.2f} <br> {(df["pid_c"].iloc[4])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[5])*price:.2f} <br> {(df["pid_c"].iloc[5])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[6])*price:.2f} <br> {(df["pid_c"].iloc[6])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[7])*price:.2f} <br> {(df["pid_c"].iloc[7])*price:.2f}',
-                          ],
-
-            'Max cost':  [f'{(df["on_off_c"].iloc[8])*price:.2f} <br> {(df["pid_c"].iloc[8])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[9])*price:.2f} <br> {(df["pid_c"].iloc[9])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[10])*price:.2f} <br> {(df["pid_c"].iloc[10])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[11])*price:.2f} <br> {(df["pid_c"].iloc[11])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[12])*price:.2f} <br> {(df["pid_c"].iloc[12])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[13])*price:.2f} <br> {(df["pid_c"].iloc[13])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[14])*price:.2f} <br> {(df["pid_c"].iloc[14])*price:.2f}',
-                          f'{(df["on_off_c"].iloc[15])*price:.2f} <br> {(df["pid_c"].iloc[15])*price:.2f}',
+            'Max % diff':[f'{((df["pid_c"].iloc[8] - df["on_off_c"].iloc[8])/df["on_off_c"].iloc[8])*100:.2f}',
+                          f'{((df["pid_c"].iloc[9] - df["on_off_c"].iloc[9])/df["on_off_c"].iloc[9])*100:.2f}',
+                          f'{((df["pid_c"].iloc[10] - df["on_off_c"].iloc[10])/df["on_off_c"].iloc[10])*100:.2f}',
+                          f'{((df["pid_c"].iloc[11] - df["on_off_c"].iloc[11])/df["on_off_c"].iloc[11])*100:.2f}',
+                          f'{((df["pid_c"].iloc[12] - df["on_off_c"].iloc[12])/df["on_off_c"].iloc[12])*100:.2f}',
+                          f'{((df["pid_c"].iloc[13] - df["on_off_c"].iloc[13])/df["on_off_c"].iloc[13])*100:.2f}',
+                          f'{((df["pid_c"].iloc[14] - df["on_off_c"].iloc[14])/df["on_off_c"].iloc[14])*100:.2f}',
+                          f'{((df["pid_c"].iloc[15] - df["on_off_c"].iloc[15])/df["on_off_c"].iloc[15])*100:.2f}',
                           ],
         }
         avg_future_power = pd.DataFrame(avg_future_power)
