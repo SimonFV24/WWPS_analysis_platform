@@ -1166,15 +1166,15 @@ class PumpSpecification:
     def __init__(self, name: str):
         self.name = name
         self.pump_data = {
-            'Pump 1': {'Brand': 'Xylem', 'Model-number': '6020.180', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 6.2, 'Rated current': 6.2, 'Wheel size': 'Not specified', 'p_f': 0.95, 'Phase': 3},
-            'Pump 2': {'Brand': 'Xylem', 'Model-number': '3127.160', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 195, 'Rated current': 24, 'Wheel size': 246, 'p_f': 0.89, 'Phase': 3},
-            'Pump 3': {'Brand': 'Xylem', 'Model-number': '3127.160', 'Configuration': 'Dry', 'Voltage': 230, 'Start current': 109, 'Rated current': 21, 'Wheel size': 487, 'p_f': 0.88, 'Phase': 3},
-            'Pump 4': {'Brand': 'Xylem', 'Model-number': '3171.181', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 462, 'Rated current': 67, 'Wheel size': 275, 'p_f': 0.93, 'Phase': 3},
-            'Pump 5': {'Brand': 'Xylem', 'Model-number': '3127.180', 'Configuration': 'Wet', 'Voltage': 400, 'Start current': 62, 'Rated current': 12, 'Wheel size': 480, 'p_f': 0.88, 'Phase': 3},
-            'Pump 6': {'Brand': 'Xylem', 'Model-number': '3127.170', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 114, 'Rated current': 24, 'Wheel size': 210, 'p_f': 0.89, 'Phase': 3},
-            'Pump 7': {'Brand': 'Xylem', 'Model-number': '3069.170', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 47, 'Rated current': 8.8, 'Wheel size': 252, 'p_f': 0.86, 'Phase': 3},
-            'Pump 8': {'Brand': 'Xylem', 'Model-number': '3102.900', 'Configuration': 'Dry', 'Voltage': 230, 'Start current': 72, 'Rated current': 11, 'Wheel size': 462, 'p_f': 0.88, 'Phase': 3},
-            'Pump 9': {'Brand': 'Grundfos', 'Model-number': '96047789', 'Configuration': 'Dry', 'Voltage': 230, 'Start current': 55, 'Rated current': 10.3, 'Wheel size': 'Not specified', 'p_f': 0.74, 'Phase': 3},
+            'Pump 1': {'Brand': 'Xylem', 'Model-number': '6020.180', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 6.2, 'Rated current': 6.2, 'Wheel number': 'Not specified', 'p_f': 0.95, 'Phase': 3},
+            'Pump 2': {'Brand': 'Xylem', 'Model-number': '3127.160', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 195, 'Rated current': 24, 'Wheel number': 246, 'p_f': 0.89, 'Phase': 3},
+            'Pump 3': {'Brand': 'Xylem', 'Model-number': '3127.160', 'Configuration': 'Dry', 'Voltage': 230, 'Start current': 109, 'Rated current': 21, 'Wheel number': 487, 'p_f': 0.88, 'Phase': 3},
+            'Pump 4': {'Brand': 'Xylem', 'Model-number': '3171.181', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 462, 'Rated current': 67, 'Wheel number': 275, 'p_f': 0.93, 'Phase': 3},
+            'Pump 5': {'Brand': 'Xylem', 'Model-number': '3127.180', 'Configuration': 'Wet', 'Voltage': 400, 'Start current': 62, 'Rated current': 12, 'Wheel number': 480, 'p_f': 0.88, 'Phase': 3},
+            'Pump 6': {'Brand': 'Xylem', 'Model-number': '3127.170', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 114, 'Rated current': 24, 'Wheel number': 210, 'p_f': 0.89, 'Phase': 3},
+            'Pump 7': {'Brand': 'Xylem', 'Model-number': '3069.170', 'Configuration': 'Wet', 'Voltage': 230, 'Start current': 47, 'Rated current': 8.8, 'Wheel number': 252, 'p_f': 0.86, 'Phase': 3},
+            'Pump 8': {'Brand': 'Xylem', 'Model-number': '3102.900', 'Configuration': 'Dry', 'Voltage': 230, 'Start current': 72, 'Rated current': 11, 'Wheel snumber': 462, 'p_f': 0.88, 'Phase': 3},
+            'Pump 9': {'Brand': 'Grundfos', 'Model-number': '96047789', 'Configuration': 'Dry', 'Voltage': 230, 'Start current': 55, 'Rated current': 10.3, 'Wheel number': 'Not specified', 'p_f': 0.74, 'Phase': 3},
         }
         self.station_name = {
             'combined_201_23.parquet': ['Pump 1'],
