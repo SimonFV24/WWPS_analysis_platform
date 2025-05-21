@@ -47,7 +47,7 @@ total_nan = pd.read_csv('./NAN_folder/nan_summary.csv')
 st.title('Station Viewer')
 st.sidebar.header('Station mode')
 
-mode_type = st.sidebar.radio('', ['Raw data', 'Climate change', 'Station flow', 'Station control', 'Maintenance', 'Station consumption', 'Userdefined analysis'])
+mode_type = st.sidebar.radio('', ['Raw data', 'Climate change', 'Station flow', 'Station control', 'Station consumption', 'Userdefined analysis'])
 
 
 def main():
@@ -59,8 +59,8 @@ def main():
         flow(rain_files)
     elif mode_type == 'Station control':
         control(parquet_files)
-    elif mode_type == 'Maintenance':
-        maintenance()
+    # elif mode_type == 'Maintenance':
+    #     maintenance()
     elif mode_type == 'Station consumption':
         consumption()
     elif mode_type == 'Userdefined analysis':
@@ -533,9 +533,9 @@ def control(files):
                     sen8.plot_control()
 
 # Main code for the maintenance analysis
-def maintenance():
-    st.header('Maintenance')
-    st.write('This part will not be covered, and moved to future work.')
+# def maintenance():
+#     st.header('Maintenance')
+#     st.write('This part will not be covered, and moved to future work.')
 
 
 # Estimated power consumption and cost pr/day for the pumps in the station
