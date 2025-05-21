@@ -551,10 +551,10 @@ def consumption():
     avg_flow_power = []
     dwf_flow_power = []
     wwf_flow_power = []
-
-    for f in power_data:
+    sorted_power_data = [sorted(component) for component in power_data]
+    for f in sorted_power_data:
         df = get_file(f,COST_DIR)
-
+        
         f = f.replace('poly_win', 'PA')
         f = f.replace('.csv', '')
         avg_flow_power.append({
