@@ -663,8 +663,9 @@ def user_data(rain_file):
         return
 
     st.subheader('Add station information:')
-    col1_1, col1_2, col1_3 = st.columns(3)
-    sump_size = col1_1.number_input('Size of station sump [m^2]', min_value=0.1, max_value=50.0, step=0.1)
+    # col1_1, col1_2, col1_3 = st.columns(3)
+    col1_2, col1_3 = st.columns(2)
+    # sump_size = col1_1.number_input('Size of station sump [m^2]', min_value=0.1, max_value=50.0, step=0.1)
     pump_setpoint = col1_2.number_input('Pump setpoint', min_value=0.0, max_value=50.0, step=1.0)
     pump_stop = col1_3.number_input('Pump stop', min_value=0.0, max_value=50.0, step=1.0)
 
