@@ -1101,6 +1101,43 @@ def future_rain(file, win, poly, rain_aalesund, rain_mr):
 
         df_future_rain = compute_and_plot_rain_scenarios(aligned_data, aligned_data_rain, df_name, average_rain_aalesund, average_rain_MR)
         dwf_wwf_plot(aligned_data, df_future_rain, df_name, 4, aligned_data_rain)
+        wwf_percent_avg, dwf_percent_avg = percent_rain(aligned_data,aligned_data_rain)
+
+        fr_hist1 = df_future_rain[['hist_1']].rename(columns={'hist_1': 'sav_flow'})
+        fr_hist2 = df_future_rain[['hist_2']].rename(columns={'hist_2':'sav_flow'})
+        fr_max45 = df_future_rain[['max_45']].rename(columns={'max_45':'sav_flow'})
+        fr_mid45 = df_future_rain[['mid_45']].rename(columns={'mid_45':'sav_flow'})
+        fr_min45 = df_future_rain[['min_45']].rename(columns={'min_45':'sav_flow'})
+        fr_max85 = df_future_rain[['max_85']].rename(columns={'max_85':'sav_flow'})
+        fr_mid85 = df_future_rain[['mid_85']].rename(columns={'mid_85':'sav_flow'})
+        fr_min85 = df_future_rain[['min_85']].rename(columns={'min_85':'sav_flow'})
+
+        wwf_percent_hist1, dwf_percent_hist1 = percent_rain(aligned_data,fr_hist1)
+        wwf_percent_hist2, dwf_percent_hist2 = percent_rain(aligned_data,fr_hist2)
+        wwf_percent_max45, dwf_percent_max45 = percent_rain(aligned_data,fr_max45)
+        wwf_percent_mid45, dwf_percent_mid45 = percent_rain(aligned_data,fr_mid45)
+        wwf_percent_min45, dwf_percent_min45 = percent_rain(aligned_data,fr_min45)
+        wwf_percent_max85, dwf_percent_max85 = percent_rain(aligned_data,fr_max85)
+        wwf_percent_mid85, dwf_percent_mid85 = percent_rain(aligned_data,fr_mid85)
+        wwf_percent_min85, dwf_percent_min85 = percent_rain(aligned_data,fr_min85)
+
+        df_sum = {
+            'Flow': ['DWF', 'WWF'],
+            'Combined average flow (2023 and 2024)': [dwf_percent_avg, wwf_percent_avg-dwf_percent_avg],
+            'Future flow for RCP 4.5 max': [dwf_percent_max45, wwf_percent_max45-dwf_percent_max45],
+            'Future flow for RCP 4.5 mid': [dwf_percent_mid45, wwf_percent_mid45-dwf_percent_mid45],
+            'Future flow for RCP 4.5 min': [dwf_percent_min45, wwf_percent_min45-dwf_percent_min45],
+            'Future flow for RCP 8.5 max': [dwf_percent_max85, wwf_percent_max85-dwf_percent_max85],
+            'Future flow for RCP 8.5 mid': [dwf_percent_mid85, wwf_percent_mid85-dwf_percent_mid85],
+            'Future flow for RCP 8.5 min': [dwf_percent_min85, wwf_percent_min85-dwf_percent_min85],
+            'Future flow for 1958-2024 trend': [dwf_percent_hist1, wwf_percent_hist1-dwf_percent_hist1],
+            'Future flow for 2000-2024 trend': [dwf_percent_hist2, wwf_percent_hist2-dwf_percent_hist2],
+        }
+        future_summary = pd.DataFrame(df_sum)
+        future_summary = future_summary.set_index('Flow')
+        df_name_2 = df_name.replace('combined','PA')
+        st.subheader(f'Scenario comparrison of DWF and WWF for {df_name_2} in 2100')
+        st.table(future_summary.T.style.format('{:.2f}'))
 
 
 def compute_and_plot_rain_scenarios(aligned_data, aligned_data_rain, df_name, average_rain_aalesund, average_rain_MR):
